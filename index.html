@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1>🌤️ Weather Dashboard</h1>
+            <p>Check weather conditions worldwide</p>
+        </header>
+
+        <!-- Search Section -->
+        <section class="search-section">
+            <div class="search-box">
+                <input 
+                    type="text" 
+                    id="locationInput" 
+                    class="search-input" 
+                    placeholder="Enter city name (e.g., London, Tokyo, New York)..."
+                    autocomplete="off"
+                >
+                <button id="searchBtn" class="search-btn">Search</button>
+            </div>
+            <div id="errorMessage" class="error-message"></div>
+        </section>
+
+        <!-- Loading Spinner -->
+        <div id="loader" class="loader hidden"></div>
+
+        <!-- Current Weather -->
+        <section id="currentWeather" class="current-weather hidden">
+            <div class="weather-header">
+                <div class="location-info">
+                    <h2 id="locationName"></h2>
+                    <p id="currentDate"></p>
+                </div>
+                <div class="weather-icon-large" id="weatherIcon"></div>
+            </div>
+
+            <div class="temperature-section">
+                <div class="temperature" id="temperature"></div>
+                <div class="weather-description" id="weatherDescription"></div>
+            </div>
+
+            <!-- Weather Details Grid -->
+            <div class="weather-details">
+                <div class="detail-card">
+                    <span class="detail-label">Feels Like</span>
+                    <span class="detail-value" id="feelsLike"></span>
+                </div>
+                <div class="detail-card">
+                    <span class="detail-label">Humidity</span>
+                    <span class="detail-value" id="humidity"></span>
+                </div>
+                <div class="detail-card">
+                    <span class="detail-label">Wind Speed</span>
+                    <span class="detail-value" id="windSpeed"></span>
+                </div>
+                <div class="detail-card">
+                    <span class="detail-label">Pressure</span>
+                    <span class="detail-value" id="pressure"></span>
+                </div>
+                <div class="detail-card">
+                    <span class="detail-label">Visibility</span>
+                    <span class="detail-value" id="visibility"></span>
+                </div>
+                <div class="detail-card">
+                    <span class="detail-label">Cloud Cover</span>
+                    <span class="detail-value" id="cloudCover"></span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Hourly Forecast -->
+        <section id="hourlyForecast" class="forecast-section hidden">
+            <h3>📊 Hourly Forecast (24 Hours)</h3>
+            <div class="hourly-container" id="hourlyContainer"></div>
+        </section>
+
+        <!-- 7-Day Forecast -->
+        <section id="dailyForecast" class="forecast-section hidden">
+            <h3>📅 7-Day Forecast</h3>
+            <div class="daily-container" id="dailyContainer"></div>
+        </section>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
