@@ -8,9 +8,15 @@
 </head>
 <body>
     <div class="container">
-        <!-- Header -->
+        <!-- Header with Controls -->
         <header class="header">
-            <h1>🌤️ Weather Dashboard</h1>
+            <div class="header-top">
+                <h1>🌤️ Weather Dashboard</h1>
+                <div class="header-controls">
+                    <button id="themeToggle" class="control-btn" title="Toggle dark/light theme">🌙</button>
+                    <button id="geolocationBtn" class="control-btn" title="Use current location">📍</button>
+                </div>
+            </div>
             <p>Check weather conditions worldwide</p>
         </header>
 
@@ -25,8 +31,30 @@
                     autocomplete="off"
                 >
                 <button id="searchBtn" class="search-btn">Search</button>
+                <button id="favoriteBtn" class="favorite-btn hidden" title="Save to favorites">⭐</button>
             </div>
             <div id="errorMessage" class="error-message"></div>
+        </section>
+
+        <!-- Unit Controls -->
+        <section id="unitControls" class="unit-controls hidden">
+            <div class="unit-group">
+                <label>Temperature:</label>
+                <button class="unit-btn active" data-temp="C">°C</button>
+                <button class="unit-btn" data-temp="F">°F</button>
+            </div>
+            <div class="unit-group">
+                <label>Wind Speed:</label>
+                <button class="unit-btn active" data-wind="kmh">km/h</button>
+                <button class="unit-btn" data-wind="mph">mph</button>
+                <button class="unit-btn" data-wind="ms">m/s</button>
+            </div>
+        </section>
+
+        <!-- Saved Locations -->
+        <section id="favoritesSection" class="favorites-section hidden">
+            <h3>⭐ Saved Locations</h3>
+            <div id="favoritesList" class="favorites-list"></div>
         </section>
 
         <!-- Loading Spinner -->
@@ -58,8 +86,13 @@
                     <span class="detail-value" id="humidity"></span>
                 </div>
                 <div class="detail-card">
-                    <span class="detail-label">Wind Speed</span>
+                    <span class="detail-label">Wind</span>
                     <span class="detail-value" id="windSpeed"></span>
+                    <span class="detail-sub" id="windDirection"></span>
+                </div>
+                <div class="detail-card">
+                    <span class="detail-label">Dew Point</span>
+                    <span class="detail-value" id="dewPoint"></span>
                 </div>
                 <div class="detail-card">
                     <span class="detail-label">Pressure</span>
@@ -72,6 +105,35 @@
                 <div class="detail-card">
                     <span class="detail-label">Cloud Cover</span>
                     <span class="detail-value" id="cloudCover"></span>
+                </div>
+                <div class="detail-card">
+                    <span class="detail-label">UV Index</span>
+                    <span class="detail-value" id="uvIndex"></span>
+                </div>
+            </div>
+
+            <!-- Sun Times -->
+            <div class="sun-times">
+                <div class="sun-time-card">
+                    <span class="sun-icon">🌅</span>
+                    <div>
+                        <span class="sun-label">Sunrise</span>
+                        <span class="sun-value" id="sunrise"></span>
+                    </div>
+                </div>
+                <div class="sun-time-card">
+                    <span class="sun-icon">🌇</span>
+                    <div>
+                        <span class="sun-label">Sunset</span>
+                        <span class="sun-value" id="sunset"></span>
+                    </div>
+                </div>
+                <div class="sun-time-card">
+                    <span class="sun-icon">☀️</span>
+                    <div>
+                        <span class="sun-label">Day Length</span>
+                        <span class="sun-value" id="dayLength"></span>
+                    </div>
                 </div>
             </div>
         </section>
