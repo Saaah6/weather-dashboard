@@ -57,7 +57,233 @@ window.addEventListener('DOMContentLoaded', () => {
     initializeTheme();
     initializeControls();
     updateFavoritesList();
+    animateOnLoad();
 });
+
+// ===== GSAP ANIMATIONS =====
+
+function animateOnLoad() {
+    // Animate header
+    gsap.from('.header', {
+        duration: 0.8,
+        opacity: 0,
+        y: -50,
+        ease: 'power2.out'
+    });
+
+    // Animate search section
+    gsap.from('.search-section', {
+        duration: 0.8,
+        opacity: 0,
+        y: 30,
+        delay: 0.2,
+        ease: 'power2.out'
+    });
+}
+
+function animateWeatherDisplay() {
+    // Animate unit controls appearance
+    gsap.from('#unitControls', {
+        duration: 0.6,
+        opacity: 0,
+        y: 20,
+        ease: 'back.out'
+    });
+
+    // Animate current weather section
+    gsap.from('#currentWeather', {
+        duration: 0.8,
+        opacity: 0,
+        scale: 0.95,
+        ease: 'back.out'
+    });
+
+    // Animate detail cards with stagger
+    gsap.from('.detail-card', {
+        duration: 0.5,
+        opacity: 0,
+        y: 20,
+        stagger: 0.08,
+        ease: 'power2.out',
+        delay: 0.2
+    });
+
+    // Animate sun times
+    gsap.from('.sun-time-card', {
+        duration: 0.5,
+        opacity: 0,
+        x: -20,
+        stagger: 0.1,
+        ease: 'power2.out',
+        delay: 0.4
+    });
+}
+
+function animateForecastDisplay() {
+    // Animate hourly forecast section
+    gsap.from('#hourlyForecast', {
+        duration: 0.8,
+        opacity: 0,
+        y: 30,
+        ease: 'power2.out',
+        delay: 0.1
+    });
+
+    // Animate hourly cards with stagger
+    gsap.from('.hourly-card', {
+        duration: 0.4,
+        opacity: 0,
+        y: 15,
+        stagger: 0.05,
+        ease: 'power2.out',
+        delay: 0.3
+    });
+
+    // Animate daily forecast section
+    gsap.from('#dailyForecast', {
+        duration: 0.8,
+        opacity: 0,
+        y: 30,
+        ease: 'power2.out',
+        delay: 0.2
+    });
+
+    // Animate daily cards with stagger
+    gsap.from('.daily-card', {
+        duration: 0.4,
+        opacity: 0,
+        scale: 0.9,
+        stagger: 0.08,
+        ease: 'back.out',
+        delay: 0.4
+    });
+}
+
+function animateWeatherIcon() {
+    const icon = document.getElementById('weatherIcon');
+    if (!icon) return;
+
+    // Continuous floating animation for weather icon
+    gsap.to(icon, {
+        duration: 3,
+        y: -20,
+        repeat: -1,
+        yoyo: true,
+        ease: 'sine.inOut'
+    });
+}
+
+function animateButtonHover(button) {
+    gsap.to(button, {
+        duration: 0.3,
+        scale: 1.1,
+        boxShadow: '0 6px 20px rgba(0, 0, 0, 0.3)',
+        ease: 'back.out'
+    });
+}
+
+function animateButtonHoverOut(button) {
+    gsap.to(button, {
+        duration: 0.3,
+        scale: 1,
+        boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
+        ease: 'power2.out'
+    });
+}
+
+function animateDetailCardHover(card) {
+    gsap.to(card, {
+        duration: 0.3,
+        scale: 1.05,
+        y: -8,
+        ease: 'power2.out'
+    });
+}
+
+function animateDetailCardHoverOut(card) {
+    gsap.to(card, {
+        duration: 0.3,
+        scale: 1,
+        y: 0,
+        ease: 'power2.out'
+    });
+}
+
+function animateTemperatureChange() {
+    const tempElement = document.getElementById('temperature');
+    if (!tempElement) return;
+
+    gsap.fromTo(tempElement, {
+        opacity: 0.5,
+        scale: 0.95
+    }, {
+        duration: 0.4,
+        opacity: 1,
+        scale: 1,
+        ease: 'back.out'
+    });
+}
+
+function animateFavoriteClick() {
+    const btn = favoriteBtn;
+    gsap.timeline()
+        .to(btn, {
+            duration: 0.2,
+            scale: 1.2,
+            ease: 'power2.out'
+        })
+        .to(btn, {
+            duration: 0.2,
+            scale: 1,
+            ease: 'power2.out'
+        });
+}
+
+function animateErrorMessage() {
+    const msg = errorMessage;
+    gsap.from(msg, {
+        duration: 0.4,
+        opacity: 0,
+        y: -10,
+        ease: 'back.out'
+    });
+
+    // Shake animation
+    gsap.to(msg, {
+        duration: 0.1,
+        x: 5,
+        repeat: 3,
+        yoyo: true,
+        ease: 'power1.inOut'
+    });
+}
+
+function animateLoaderSpin() {
+    gsap.to('#loader', {
+        duration: 1,
+        rotation: 360,
+        repeat: -1,
+        ease: 'none'
+    });
+}
+
+function animateFavoritesSection() {
+    gsap.from('#favoritesSection', {
+        duration: 0.6,
+        opacity: 0,
+        y: 20,
+        ease: 'back.out'
+    });
+}
+
+function animateFavoriteItem(item) {
+    gsap.from(item, {
+        duration: 0.4,
+        opacity: 0,
+        scale: 0.8,
+        ease: 'back.out'
+    });
+}
 
 // Theme Toggle
 function initializeTheme() {
@@ -69,6 +295,16 @@ function initializeTheme() {
 }
 
 themeToggle.addEventListener('click', () => {
+    // Rotate animation for theme toggle
+    gsap.to(themeToggle, {
+        duration: 0.6,
+        rotation: 360,
+        ease: 'back.out',
+        onComplete: () => {
+            gsap.set(themeToggle, { rotation: 0 });
+        }
+    });
+
     document.body.classList.toggle('dark-theme');
     const isDark = document.body.classList.contains('dark-theme');
     localStorage.setItem('theme', isDark ? 'dark' : 'light');
@@ -77,6 +313,19 @@ themeToggle.addEventListener('click', () => {
 
 // Geolocation
 geolocationBtn.addEventListener('click', () => {
+    // Scale animation on click
+    gsap.to(geolocationBtn, {
+        duration: 0.2,
+        scale: 0.9,
+        ease: 'power2.out'
+    });
+
+    gsap.to(geolocationBtn, {
+        duration: 0.2,
+        scale: 1,
+        ease: 'power2.out'
+    });
+
     if (navigator.geolocation) {
         showLoader();
         navigator.geolocation.getCurrentPosition(
@@ -131,6 +380,20 @@ function initializeControls() {
             const group = e.target.parentElement;
             group.querySelectorAll('.unit-btn').forEach(b => b.classList.remove('active'));
             e.target.classList.add('active');
+
+            // Pulse animation on unit change
+            gsap.to(e.target, {
+                duration: 0.3,
+                scale: 1.1,
+                ease: 'back.out'
+            });
+
+            gsap.to(e.target, {
+                duration: 0.2,
+                scale: 1,
+                ease: 'power2.out',
+                delay: 0.1
+            });
             
             if (e.target.dataset.temp) {
                 tempUnit = e.target.dataset.temp;
@@ -140,14 +403,20 @@ function initializeControls() {
             
             if (currentWeatherData) {
                 updateWeatherDisplay();
+                animateTemperatureChange();
             }
         });
+
+        // Hover animations
+        btn.addEventListener('mouseenter', () => animateButtonHover(btn));
+        btn.addEventListener('mouseleave', () => animateButtonHoverOut(btn));
     });
 }
 
 // Favorites
 favoriteBtn.addEventListener('click', () => {
     if (currentLocation) {
+        animateFavoriteClick();
         const locName = `${currentLocation.name}${currentLocation.region ? ', ' + currentLocation.region : ''}`;
         if (!favorites.find(f => f.name === locName)) {
             favorites.push({
@@ -168,6 +437,8 @@ function updateFavoritesList() {
     
     if (favorites.length > 0) {
         favoritesSection.classList.remove('hidden');
+        animateFavoritesSection();
+        
         favorites.forEach((fav, index) => {
             const item = document.createElement('div');
             item.className = 'favorite-item';
@@ -175,14 +446,26 @@ function updateFavoritesList() {
                 <span class="favorite-name">${fav.name}</span>
                 <button class="favorite-remove">✕</button>
             `;
+            animateFavoriteItem(item);
+            
             item.querySelector('.favorite-name').addEventListener('click', () => {
                 loadFavorite(fav);
             });
+            
             item.querySelector('.favorite-remove').addEventListener('click', (e) => {
                 e.stopPropagation();
-                favorites.splice(index, 1);
-                localStorage.setItem('favorites', JSON.stringify(favorites));
-                updateFavoritesList();
+                // Animate removal
+                gsap.to(item, {
+                    duration: 0.3,
+                    opacity: 0,
+                    scale: 0.8,
+                    ease: 'back.in',
+                    onComplete: () => {
+                        favorites.splice(index, 1);
+                        localStorage.setItem('favorites', JSON.stringify(favorites));
+                        updateFavoritesList();
+                    }
+                });
             });
             favoritesList.appendChild(item);
         });
@@ -234,6 +517,9 @@ async function handleSearch() {
         displayCurrentWeather(weatherData);
         displayHourlyForecast(weatherData);
         displayDailyForecast(weatherData);
+
+        animateWeatherDisplay();
+        animateForecastDisplay();
 
         hideLoader();
     } catch (error) {
@@ -361,6 +647,13 @@ function displayCurrentWeather(data) {
     document.getElementById('dayLength').textContent = `${Math.floor(dayLength)}h ${Math.round((dayLength % 1) * 60)}m`;
 
     currentWeatherSection.classList.remove('hidden');
+    animateWeatherIcon();
+
+    // Add hover animations to detail cards
+    document.querySelectorAll('.detail-card').forEach(card => {
+        card.addEventListener('mouseenter', () => animateDetailCardHover(card));
+        card.addEventListener('mouseleave', () => animateDetailCardHoverOut(card));
+    });
 }
 
 function updateWeatherDisplay() {
@@ -439,18 +732,22 @@ function displayDailyForecast(data) {
 // Utility Functions
 function showLoader() {
     loader.classList.remove('hidden');
+    animateLoaderSpin();
 }
 
 function hideLoader() {
     loader.classList.add('hidden');
+    gsap.killTweensOf('#loader');
 }
 
 function showError(message, isError = true) {
     errorMessage.textContent = message;
     if (isError) {
         errorMessage.classList.add('show');
+        animateErrorMessage();
     } else {
         errorMessage.classList.add('show');
+        animateErrorMessage();
         setTimeout(() => {
             errorMessage.classList.remove('show');
         }, 3000);
@@ -458,8 +755,14 @@ function showError(message, isError = true) {
 }
 
 function clearError() {
-    errorMessage.classList.remove('show');
-    errorMessage.textContent = '';
+    gsap.to(errorMessage, {
+        duration: 0.3,
+        opacity: 0,
+        onComplete: () => {
+            errorMessage.classList.remove('show');
+            errorMessage.textContent = '';
+        }
+    });
 }
 
 function hideAllSections() {
